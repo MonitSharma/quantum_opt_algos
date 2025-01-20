@@ -110,6 +110,11 @@ print("-----------------------------------------------------")
 
 # cost function
 
+cost_history_dict = {
+    "prev_vector": None,
+    "iters": 0,
+    "cost_history": [],
+}
 
 def cost_func_estimator(params, ansatz, hamiltonian, estimator):
 
@@ -122,6 +127,14 @@ def cost_func_estimator(params, ansatz, hamiltonian, estimator):
 
     results = job.result()[0]
     cost = results.data.evs
+
+
+    cost_history_dict["iters"] += 1
+    cost_history_dict["prev_vector"] = params
+    cost_history_dict["cost_history"].append(cost)
+    print(f"Iters. done: {cost_history_dict['iters']} [Current cost: {cost}]")
+
+
 
     objective_func_vals.append(cost)
 
@@ -136,7 +149,7 @@ result = minimize(
     cost_func_estimator,
     init_params,
     args= (circuit, qubitOp, estimator),
-    method="COBYLA",
+    method="Powell",
     tol=1e-3
 )
 optimization_time_end = time.time()
