@@ -1,4 +1,7 @@
 import math
+import matplotlib.pyplot as plt
+from IPython.display import display, clear_output
+from scipy.optimize import minimize
 import numpy as np
 from qiskit.quantum_info import Pauli, SparsePauliOp, Statevector
 import pickle
@@ -129,9 +132,10 @@ class PauliCorrelationOptimizer:
         else:
             self.steps = None
 
-            
+        self.cost_history_dict = {"prev_vector": None, "iters": 0, "cost_history": []}    
 
-    
+        self.min_loss_observed = float('inf')
+        self.max_loss_observed = float('-inf')
 
     
 
@@ -308,6 +312,33 @@ class PauliCorrelationOptimizer:
             loss = self.total_loss(psi, self.qp, self.graph, self.k,None)
         else:
             loss = self.total_loss(psi,None,None,self.k, self.qubo)
+
+        #self.min_loss_observed = min(self.min_loss_observed, loss)
+        #self.max_loss_observed = max(self.max_loss_observed, loss)
+        self.cost_history_dict["iters"] += 1
+        # Normalize using observed range
+        #scaled_loss = (loss - self.min_loss_observed) / (self.max_loss_observed - self.min_loss_observed + 1e-8)
+        
+        self.cost_history_dict["cost_history"].append(loss)
+        #print(f"Iters. done: {self.cost_history_dict['iters']} [Current cost: {loss}]")
+
+
+        # Live plotting
+        iters = list(range(1, self.cost_history_dict["iters"] + 1))
+        costs = self.cost_history_dict["cost_history"]
+        plt.figure(figsize=(10, 6))
+        plt.plot(iters, costs, marker='o', linestyle='-', color='b')
+        plt.xlabel("Iterations")
+        plt.ylabel("Cost")
+        plt.title("Optimization Progress: Iterations vs. Cost")
+        plt.grid(True)
+        plt.tight_layout()
+
+        # Display plot and update live
+        clear_output(wait=True)
+        display(plt.gcf())
+        plt.close()
+        
         return loss
         
     def optimize(self,optimizer,params):
@@ -352,8 +383,16 @@ class PauliCorrelationOptimizer:
                 perturbed_params = adaptive_perturbation(
                     params, current_perturbation_factor, no_improvement_count, historical_trend
                 )
-
-                result = optimizer.minimize(fun=self.solve, x0=perturbed_params)
+                method = "Nelder-Mead"  # Change this to other methods like "COBYLA", "Powell", etc., if required.
+                options = {"maxiter": 500, "disp": True}
+                #result = optimizer.minimize(fun=self.solve, x0=perturbed_params)
+                result = minimize(
+                    fun=self.solve,  # Cost function to minimize
+                    x0=perturbed_params,       # Initial parameters
+                    method=method,  # Additional options
+                    options=options
+                )
+                
                 optimized_params = result.x
                 pauli_encoder = PauliCorrelationEncoding()
                 final_ansatz = pauli_encoder.BrickWork(depth= self.depth, num_qubits=self.num_qubits).assign_parameters(optimized_params)
@@ -411,10 +450,23 @@ class PauliCorrelationOptimizer:
 
             print("\nOptimization complete.")
             print(f"Best QUBO cost: {best_qubo_cost}")
+
+
             return best_params
         else:    
             print("Single Optimization")
-            result = optimizer.minimize(fun = self.solve, x0=params)
+            method = "Nelder-Mead"  # Change this to other methods like "COBYLA", "Powell", etc., if required.
+            options = {"maxiter": 500, "disp": True}
+
+            # Optimization loop
+            result = minimize(
+                fun=self.solve,  # Cost function to minimize
+                x0=params,       # Initial parameters
+                method=method,  # Additional options
+                options=options
+            )
+
+            #result = optimizer.minimize(fun = self.solve, x0=params)
             return result.x
         
 
