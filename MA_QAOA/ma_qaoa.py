@@ -112,41 +112,6 @@ coefficients = [float(coeff.real) for coeff in qubitOp.coeffs]  # Use .real sinc
 This is the logic
 """
 
-# qc = QuantumCircuit(qubitOp.num_qubits)
-# theta_counter = 0  # Counter to give unique theta names
-# # Step 1: Apply equal superposition
-# qc.h(range(qubitOp.num_qubits))
-
-# # Step 2: Apply gates based on Pauli strings
-# for pauli_string, coeff in zip(pauli_strings, coefficients):
-#     # Identify indices with 'Z'
-#     z_indices = [i for i, char in enumerate(reversed(pauli_string)) if char == 'Z']
-    
-#     # If there's a single 'Z', add an RZ gate
-#     if len(z_indices) == 1:
-#         qubit = z_indices[0]
-#         theta = Parameter(f"θ_{theta_counter}")
-#         theta_counter += 1
-#         angle = 2 * coeff * theta
-#         qc.append(RZGate(angle), [qubit])
-    
-#     # If there are two 'Z's, add an RZZ gate
-#     elif len(z_indices) == 2:
-#         qubit1, qubit2 = z_indices
-#         theta = Parameter(f"θ_{theta_counter}")
-#         theta_counter += 1
-#         angle = 2 * coeff * theta
-#         qc.append(RZZGate(angle), [qubit1, qubit2])
-
-# # Step 3: Apply RX gates on all qubits
-# for qubit in range(qubitOp.num_qubits):
-#     theta = Parameter(f"θ_{theta_counter}")
-#     theta_counter += 1
-#     angle = 2 * theta
-#     qc.append(RXGate(angle), [qubit])
-
-
-# print(qc)
 
 
 

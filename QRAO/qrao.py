@@ -158,24 +158,6 @@ for i, bitlist in enumerate(top_x_values):
     print(f"Cost of the interpreted result: {cost}")
     print("-" * 50)  # Separator for readability
 
-# Print the top 10 x values
-# print("Top 10 x values:")
-# for bitlist in top_x_values:
-#     print(bitlist)
-
-
-# # convert the qubo bitstring to the original problem
-# x = converter.interpret(results.x)
-# print(f"Interpreted result: {x}")
-
-# # check if it's feasible
-# print(f"Is the result feasible? {problem.is_feasible(x)}")
-
-# # get the market share cost from this x
-# cost = problem.objective.evaluate(x)
-
-
-# print(f"Cost of the interpreted result: {cost}")
 
 
 print("QRAO Finished")
