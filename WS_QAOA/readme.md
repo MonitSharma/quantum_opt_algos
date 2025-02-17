@@ -1,1 +1,0 @@
-# Warm Start QAOA

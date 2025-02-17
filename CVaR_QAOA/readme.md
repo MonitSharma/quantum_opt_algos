@@ -1,1 +1,0 @@
-# Conditional Value at Risk QAOA

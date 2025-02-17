@@ -1,1 +1,0 @@
-# Quantum Approximate Optimization Algorithm
