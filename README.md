@@ -2,6 +2,8 @@
 
 Welcome to the **Quantum Optimization Algorithms** repository! This project contains implementations of various quantum optimization techniques designed for solving combinatorial optimization problems. By leveraging quantum computing, these algorithms aim to provide efficient solutions to problems that are computationally challenging for classical methods.
 
+See [Quantum Optimization Benchmark](https://github.com/MonitSharma/quantum_optimization_benchmarks) for benchmarking instances.
+
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -130,6 +132,21 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 This repository is developed to support research in quantum optimization. Contributions from the open-source community play a crucial role in improving implementations and expanding the benchmark datasets.
 
-Please cite the paper, if you use this work
+Cite the paper, if you use this work
+
+[A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems](https://arxiv.org/abs/2503.12121)
+
+```bash
+@misc{sharma2025comparativestudyquantumoptimization,
+      title={A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems}, 
+      author={Monit Sharma and Hoong Chuin Lau},
+      year={2025},
+      eprint={2503.12121},
+      archivePrefix={arXiv},
+      primaryClass={quant-ph},
+      url={https://arxiv.org/abs/2503.12121}, 
+}
+```
+
 
 Feel free to explore, contribute, and collaborate!
