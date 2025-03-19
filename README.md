@@ -1,4 +1,4 @@
-# This project has been migrated to the [SMU‑Quantum](https://github.com/SMU-Quantum) organization. You can now find the latest code [here]([https://github.com/SMU-Quantum/quantum-optimization-benchmarks](https://github.com/SMU-Quantum/quantum-optimization-algorithms)) This repository will be removed on March 23, 2025. Please update any bookmarks or references to point to the new location.
+# This project has been migrated to the [SMU‑Quantum](https://github.com/SMU-Quantum) organization. You can now find the latest code [here][https://github.com/SMU-Quantum/quantum-optimization-benchmarks](https://github.com/SMU-Quantum/quantum-optimization-algorithms)) This repository will be removed on March 23, 2025. Please update any bookmarks or references to point to the new location.
 
 
 ---
